@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigma OS Launcher</title>
+</head>
+<body style="margin:0;background:#000;display:flex;justify-content:center;align-items:center;height:100vh;">
+
+    <!-- This button immediately opens the about:blank window -->
+    <button onclick="openSystem()" style="padding:15px 30px;font-size:18px;cursor:pointer;">Launch Sigma OS</button>
+
+    <script>
+        function openSystem() {
+            // 1. Opens the blank tab
+            const win = window.open('about:blank', '_blank');
+
+            if (win) {
+                // 2. The exact URL you want inside it
+                const url = 'https://base44.app'; 
+
+                // 3. The full-screen iframe template
+                const iframeCode = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Sigma OS</title>
+                        <style>
+                            html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #000; }
+                            iframe { border: none; width: 100%; height: 100%; display: block; }
+                        </style>
+                    </head>
+                    <body>
+                        <iframe src="${url}"></iframe>
+                    </body>
+                    </html>
+                `;
+
+                // 4. Writes the code into the empty about:blank document
+                win.document.open();
+                win.document.write(iframeCode);
+                win.document.close();
+            } else {
+                alert('Please allow popups for this site!');
+            }
+        }
+    </script>
+
+</body>
+</html>
